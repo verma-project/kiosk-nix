@@ -19,7 +19,10 @@
     shfmt.enable = true;
     statix = {
       enable = true;
-      settings.ignore = [ ".direnv" ];
+      settings.ignore = [
+        ".direnv"
+        ".devenv*"
+      ];
     };
   };
 }
