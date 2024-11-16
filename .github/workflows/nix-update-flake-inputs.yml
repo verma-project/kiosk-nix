@@ -30,7 +30,7 @@ jobs:
           branch: chore/flake-updates
           delete-branch: true
           title: "chore(deps): Update Flake inputs"
-          branch-suffix: "short-commit-has"
+          branch-suffix: "short-commit-hash"
           reviewers: "shymega"
           assignees: "shymega"
           body: |
