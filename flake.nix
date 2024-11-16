@@ -48,6 +48,10 @@
           inherit inputs pkgs;
           modules = [ ./devenv.nix ];
         };
+
+        checks = {
+          inherit (pkgs) hello;
+        };
       }
     )
     // {
