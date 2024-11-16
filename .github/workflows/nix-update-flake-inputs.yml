@@ -16,7 +16,8 @@ jobs:
       - uses: cachix/install-nix-action@v30
         with:
           extra_nix_config: |
-            experimental-features = nix-command flakes
+             experimental-features = nix-command flakes
+             extra-platforms = aarch64-linux
       - name: Update Flake inputs
         run: nix flake update
       - name: Create Pull Request
