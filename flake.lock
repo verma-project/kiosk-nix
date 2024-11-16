@@ -228,15 +228,16 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1729742964,
-        "narHash": "sha256-B4mzTcQ0FZHdpeWcpDYPERtyjJd/NIuaQ9+BV1h+MpA=",
-        "owner": "nix-community",
+        "lastModified": 1731792334,
+        "narHash": "sha256-1kUuX2XvYJ+29Jsv6rcERQBQDwDDRnn7l1Rz4/OF5p8=",
+        "owner": "shymega",
         "repo": "nix-github-actions",
-        "rev": "e04df33f62cdcf93d73e9a04142464753a16db67",
+        "rev": "98010186b66ef6bb7f65b6a392cc2c73295d07c3",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "shymega",
+        "ref": "shymega-patch",
         "repo": "nix-github-actions",
         "type": "github"
       }
