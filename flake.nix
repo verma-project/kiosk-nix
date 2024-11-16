@@ -39,7 +39,6 @@
       in
       {
         packages = {
-          inherit (pkgs) hello;
           devenv-up = self.devShells.${system}.default.config.procfileScript;
           devenv-test = self.devShells.${system}.default.config.test;
         };
@@ -50,14 +49,17 @@
         };
 
         checks = {
-          inherit (pkgs) hello;
+          inherit (self.devShells.${system}.default) ci;
         };
       }
     )
     // {
       githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
         # Enable support for arm64 Linux + armv7l/armv6l.
-        checks = inputs.nixpkgs.lib.getAttrs [ "x86_64-linux" ] self.checks;
+        checks = inputs.nixpkgs.lib.getAttrs [
+          "x86_64-linux"
+          "aarch64-linux"
+        ] self.checks;
       };
     };
 }
