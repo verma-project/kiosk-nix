@@ -10,9 +10,9 @@
   difftastic.enable = true;
   git-hooks.hooks = {
     actionlint.enable = true;
+    alejandra.enable = true;
     deadnix.enable = true;
     markdownlint.enable = true;
-    nixfmt-rfc-style.enable = true;
     reuse.enable = true;
     shellcheck.enable = true;
     shfmt.enable = true;
