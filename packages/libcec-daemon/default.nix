@@ -1,7 +1,6 @@
 # SPDX-FileCopyrightText: 2020 Matthew Bauer <mjbauer95@gmail.com>
 #
 # SPDX-License-Identifier: MIT
-
 {
   stdenv,
   fetchFromGitHub,
