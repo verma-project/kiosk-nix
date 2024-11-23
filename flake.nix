@@ -34,7 +34,7 @@
 
   outputs = {self, ...} @ inputs: let
     inherit (inputs.flake-utils.lib) eachDefaultSystem;
-    treeFmtEachSystem = f: inputs.nixpkgs.lib.genAttrs (import inputs.systems) (system: f inputs.nixpkgs.legacyPackages.${system});
+    treeFmtEachSystem = f: inputs.nixpkgs.lib.genAttrs (import inputs.systems) (system: f genPkgs system);
     treeFmtEval = treeFmtEachSystem (pkgs: inputs.treefmt-nix.lib.evalModule pkgs ./nix/formatter.nix);
 
     genPkgs = system:
