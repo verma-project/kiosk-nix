@@ -14,7 +14,7 @@ concurrency:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    if: ${{ github.repository_owner == "shymega" }}
+    if: ${{ github.repository_owner == 'shymega' }}
     steps:
       - uses: actions/checkout@v4
       - uses: docker/setup-qemu-action@v3
