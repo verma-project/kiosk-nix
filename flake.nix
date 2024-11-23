@@ -18,6 +18,7 @@
     };
     systems.url = "github:nix-systems/default-linux";
     nix-github-actions.url = "github:shymega/nix-github-actions?ref=shymega-patch";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
   nixConfig = {
@@ -25,18 +26,21 @@
     extra-trusted-substituters = [ "https://cache.nixos.org/" ];
   };
 
-  outputs =
-    { self, ... }@inputs:
-    let
-      inherit (inputs.flake-utils.lib) eachDefaultSystem;
-      genPkgs = system: inputs.nixpkgs.legacyPackages.${system};
-    in
+  outputs = {self, ...} @ inputs: let
+    inherit (inputs.flake-utils.lib) eachDefaultSystem;
+    treeFmtEachSystem = f: inputs.nixpkgs.lib.genAttrs (import inputs.systems) (system: f inputs.nixpkgs.legacyPackages.${system});
+    treeFmtEval = treeFmtEachSystem (pkgs: inputs.treefmt-nix.lib.evalModule pkgs ./nix/formatter.nix);
+
+    genPkgs = system:
+      import inputs.nixpkgs {
+        inherit system;
+        config = {allowUnfree = true;};
+      };
+  in
     eachDefaultSystem (
-      system:
-      let
+      system: let
         pkgs = genPkgs system;
-      in
-      {
+      in {
         packages = {
           devenv-up = self.devShells.${system}.default.config.procfileScript;
           devenv-test = self.devShells.${system}.default.config.test;
@@ -44,21 +48,25 @@
 
         devShells.default = inputs.devenv.lib.mkShell {
           inherit inputs pkgs;
-          modules = [ ./devenv.nix ];
-        };
-
-        checks = {
-          inherit (self.devShells.${system}.default) ci;
+          modules = [./devenv.nix];
         };
       }
     )
     // {
       githubActions = inputs.nix-github-actions.lib.mkGithubMatrix {
         # Enable support for arm64 Linux + armv7l/armv6l.
-        checks = inputs.nixpkgs.lib.getAttrs [
-          "x86_64-linux"
-          "aarch64-linux"
-        ] self.checks;
+        checks =
+          inputs.nixpkgs.lib.getAttrs [
+            "x86_64-linux"
+            "aarch64-linux"
+          ]
+          self.checks;
       };
+      checks = treeFmtEachSystem (pkgs: {
+        formatting = treeFmtEval.${pkgs.system}.config.build.wrapper;
+        inherit (self.devShells.${pkgs.system}.default) ci;
+      });
+
+      formatter = treeFmtEachSystem (pkgs: treeFmtEval.${pkgs.system}.config.build.wrapper);
     };
 }
