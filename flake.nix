@@ -47,10 +47,12 @@
       system: let
         pkgs = genPkgs system;
       in {
-        packages = {
-          devenv-up = self.devShells.${system}.default.config.procfileScript;
-          devenv-test = self.devShells.${system}.default.config.test;
-        };
+        packages =
+          {
+            devenv-up = self.devShells.${system}.default.config.procfileScript;
+            devenv-test = self.devShells.${system}.default.config.test;
+          }
+          // import ./packages {inherit pkgs system inputs;};
 
         devShells.default = inputs.devenv.lib.mkShell {
           inherit inputs pkgs;
