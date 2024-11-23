@@ -1,6 +1,6 @@
-# SPDX-FileCopyrightText: 2024 Dom Rodriguez
+# SPDX-FileCopyrightText: 2024 Dom Rodriguez <shymega@shymega.org.uk>
 #
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: GPL-3.0-only
 
 (import (
   let
