@@ -22,8 +22,14 @@
   };
 
   nixConfig = {
-    extra-trusted-public-keys = ["cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="];
-    extra-trusted-substituters = ["https://cache.nixos.org/"];
+    substituters = [
+      "https://kiosk-nix.cachix.org?priority=10"
+      "https://cache.nixos.org?priority=15"
+    ];
+    trusted-public-keys = [
+      "kiosk-nix.cachix.org-1:3PObJTqAZqXFU7Mdo3MfBNbGUWsAUgHksH8rXbPXAcY="
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    ];
   };
 
   outputs = {self, ...} @ inputs: let
