@@ -8,20 +8,37 @@
   };
   devcontainer.enable = true;
   difftastic.enable = true;
-  git-hooks.hooks = {
-    actionlint.enable = true;
-    alejandra.enable = true;
-    deadnix.enable = true;
-    markdownlint.enable = true;
-    reuse.enable = true;
-    shellcheck.enable = true;
-    shfmt.enable = true;
-    statix = {
-      enable = true;
-      settings.ignore = [
-        ".direnv"
-        ".devenv*"
-      ];
+  git-hooks = {
+    excludes = [
+      ".direnv/"
+      ".devenv/"
+      ".devenv.flake.nix"
+      ".devenv.d*/"
+    ];
+
+    hooks = {
+      actionlint.enable = true;
+      alejandra = {
+        enable = true;
+      };
+      deadnix = {
+        enable = true;
+      };
+      markdownlint = {
+        enable = true;
+      };
+      reuse = {
+        enable = false;
+      };
+      statix = {
+        enable = true;
+        settings.ignore = [
+          ".direnv/"
+          ".devenv/"
+          ".devenv.flake.nix"
+          ".devenv*/"
+        ];
+      };
     };
   };
 }
