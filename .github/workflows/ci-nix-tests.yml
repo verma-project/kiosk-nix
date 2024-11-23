@@ -23,7 +23,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           extra-conf: |
-            extra-platforms = aarch64-linux armv6l-linux armv7-linux i686-linux riscv64-linux
+            extra-platforms = aarch64-linux armv6l-linux armv7l-linux i686-linux riscv64-linux
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - id: set-matrix
         name: Generate Nix Matrix
@@ -45,6 +45,6 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           extra-conf: |
-            extra-platforms = aarch64-linux armv6l-linux armv7-linux i686-linux riscv64-linux
+            extra-platforms = aarch64-linux armv6l-linux armv7l-linux i686-linux riscv64-linux
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - run: nix build -L ".#${{ matrix.attr }}" --impure
