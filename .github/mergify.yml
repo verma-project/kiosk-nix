@@ -3,9 +3,11 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 pull_request_rules:
-  - name: Automatic merge for Dependabot pull requests
+  - name: Automatic merge for Dependabot pull requests or Flake updates
     conditions:
-      - author=dependabot[bot]
+      - or:
+        - author=github-actions[bot]
+        - author=dependabot[bot]
     actions:
       merge:
         method: squash
