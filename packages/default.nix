@@ -8,4 +8,5 @@
 }:
 with pkgs; {
   libcec-daemon = callPackage ./libcec-daemon {};
+  build-script = callPackage ./scripts/build-script {inherit self;};
 }
