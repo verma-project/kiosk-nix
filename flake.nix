@@ -34,13 +34,18 @@
 
   outputs = {self, ...} @ inputs: let
     inherit (inputs.flake-utils.lib) eachDefaultSystem;
-    treeFmtEachSystem = f: inputs.nixpkgs.lib.genAttrs (import inputs.systems) (system: f inputs.nixpkgs.legacyPackages.${system});
+    treeFmtEachSystem = f:
+      inputs.nixpkgs.lib.genAttrs (import inputs.systems) (
+        system: f inputs.nixpkgs.legacyPackages.${system}
+      );
     treeFmtEval = treeFmtEachSystem (pkgs: inputs.treefmt-nix.lib.evalModule pkgs ./nix/formatter.nix);
 
     genPkgs = system:
       import inputs.nixpkgs {
         inherit system;
-        config = {allowUnfree = true;};
+        config = {
+          allowUnfree = true;
+        };
       };
   in
     eachDefaultSystem (
@@ -52,7 +57,7 @@
             devenv-up = self.devShells.${system}.default.config.procfileScript;
             devenv-test = self.devShells.${system}.default.config.test;
           }
-          // import ./packages {inherit pkgs system inputs;};
+          // import ./packages {inherit pkgs system inputs self;};
 
         devShells.default = inputs.devenv.lib.mkShell {
           inherit inputs pkgs;
