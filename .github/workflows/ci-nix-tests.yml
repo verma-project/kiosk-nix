@@ -3,15 +3,12 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 name: Nix Flake actions
-
 on:
   pull_request:
   push:
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   nix-matrix:
     runs-on: ubuntu-latest
@@ -31,10 +28,9 @@ jobs:
           set -Eeu
           matrix="$(nix eval --json '.#githubActions.matrix')"
           echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
-
   nix-run-checks:
     name: ${{ matrix.name }} (${{ matrix.system }})
-    needs: [ nix-matrix ]
+    needs: [nix-matrix]
     if: ${{ needs.nix-matrix.result == 'success' }}
     runs-on: ${{ matrix.os }}
     strategy:
