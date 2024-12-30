@@ -27,4 +27,4 @@ jobs:
           name: kiosk-nix
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Build and push  to Cachix.
-        run: nix build github:srid/devour-flake -L --no-link --print-out-paths --override-input flake path:"$GITHUB_WORKSPACE" --impure
+        run: nix build --override-input nixpkgs github:NixOS/nixpkgs/release-24.05 github:srid/devour-flake -L --no-link --print-out-paths --override-input flake path:"$GITHUB_WORKSPACE" --impure
