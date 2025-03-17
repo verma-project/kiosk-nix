@@ -22,7 +22,7 @@ jobs:
           extra-conf: |
             extra-platforms = aarch64-linux armv6l-linux armv7l-linux i686-linux riscv64-linux
       - uses: DeterminateSystems/magic-nix-cache-action@main
-      - uses: cachix/cachix-action@v15
+      - uses: cachix/cachix-action@v16
         with:
           name: kiosk-nix
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
