@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     systems.url = "github:nix-systems/default-linux";
-    nix-github-actions.url = "github:shymega/nix-github-actions?ref=shymega-patch";
+    nix-github-actions.url = "github:nix-community/nix-github-actions";
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
