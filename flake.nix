@@ -33,7 +33,8 @@
     ];
   };
 
-  outputs = {self, ...} @ inputs: let
+  outputs = inputs: let
+    inherit (inputs) self;
     inherit (inputs.flake-utils.lib) eachDefaultSystem;
     treeFmtEachSystem = f:
       inputs.nixpkgs.lib.genAttrs (import inputs.systems) (
