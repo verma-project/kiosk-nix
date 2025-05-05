@@ -7,6 +7,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
     flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
     flake-utils = {
       url = "github:numtide/flake-utils";
@@ -81,5 +82,7 @@
       });
 
       formatter = treeFmtEachSystem (pkgs: treeFmtEval.${pkgs.system}.config.build.wrapper);
+
+      nixosModules = import ./modules { inherit inputs; };
     };
 }
