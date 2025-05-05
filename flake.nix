@@ -84,6 +84,6 @@
 
       formatter = treeFmtEachSystem (pkgs: treeFmtEval.${pkgs.system}.config.build.wrapper);
 
-      nixosModules = import ./modules { inherit inputs; };
+      nixosModules = import ./modules {inherit inputs;};
     };
 }

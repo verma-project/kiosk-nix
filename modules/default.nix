@@ -1,5 +1,5 @@
-{ inputs }: let
+{inputs}: let
   inherit (inputs) nixos-hardware;
 in {
-  common-pc = nixos-hardware.nixosModules.common-pc;
+  inherit (nixos-hardware.nixosModules) common-pc;
 }
