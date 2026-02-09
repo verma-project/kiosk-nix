@@ -56,8 +56,8 @@
       in {
         packages =
           {
-            devenv-up = self.devShells.${system}.default.config.procfileScript;
-            devenv-test = self.devShells.${system}.default.config.test;
+            devenv-up = self.devShells.${pkgs.stdenv.hostPlatform.system}.default.config.procfileScript;
+            devenv-test = self.devShells.${pkgs.stdenv.hostPlatform.system}.default.config.test;
           }
           // import ./packages {inherit pkgs system inputs self;};
 
@@ -78,11 +78,11 @@
           self.checks;
       };
       checks = treeFmtEachSystem (pkgs: {
-        formatting = treeFmtEval.${pkgs.system}.config.build.wrapper;
-        inherit (self.devShells.${pkgs.system}.default) ci;
+        formatting = treeFmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.wrapper;
+        inherit (self.devShells.${pkgs.stdenv.hostPlatform.system}.default) ci;
       });
 
-      formatter = treeFmtEachSystem (pkgs: treeFmtEval.${pkgs.system}.config.build.wrapper);
+      formatter = treeFmtEachSystem (pkgs: treeFmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.wrapper);
 
       nixosModules = import ./modules {inherit inputs;};
     };
