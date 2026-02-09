@@ -16,7 +16,9 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v6
-      - run: sudo apt-get install -y qemu-user-static
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           extra-conf: |
