@@ -16,7 +16,7 @@ jobs:
     if: ${{ github.repository_owner == 'verma-project' }}
     steps:
       - uses: actions/checkout@v6
-      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-qemu-action@v4
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           extra-conf: |
